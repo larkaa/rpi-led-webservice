@@ -5,8 +5,8 @@ import sys
 #print(sys.path)
 from flask import Flask, request, redirect, url_for, render_template, flash, render_template_string
 from werkzeug.utils import secure_filename
-import generate_photo
-import subprocess
+#import generate_photo
+#import subprocess
 import time
 import random
 from redis import Redis
@@ -51,7 +51,7 @@ def upload_file():
         if rand:
             rand = random.choice(os.listdir('/home/pi/Desktop/gifs/'))
             #print(rand)       
-            proc_s = 'sudo /home/pi/code/rpi-rgb-led-matrix/utils/led-image-viewer --led-cols=64 --led-rows=32 --led-brightness=50 -t7 -C /home/pi/Desktop/gifs/{}'.format(rand)
+            proc_s = 'sudo /home/pi/code/rpi-led-webservice/utils/led-image-viewer --led-cols=64 --led-rows=32 --led-brightness=50 -t7 -C /home/pi/Desktop/gifs/{}'.format(rand)
             print(proc_s)
             
         else:
@@ -62,9 +62,9 @@ def upload_file():
             color = request.form["text_color"].replace(' ','').strip()
             print(color) 
             cap = request.form["caption"]
-            proc_string1 = 'sudo /home/pi/code/rpi-rgb-led-matrix/examples-api-use/demo --led-cols=64 --led-rows=32 -D11 -t 2.2'
+            proc_string1 = 'sudo /home/pi/code/rpi-led-webservice/examples-api-use/demo --led-cols=64 --led-rows=32 -D11 -t 2.2'
             
-            proc_string2 = 'sudo /home/pi/code/rpi-rgb-led-matrix/examples-api-use/scrolling-text-example --led-cols=64 --led-rows=32 -s 8 -b {} -f ../fonts/7x13B.bdf -C {} -y 8 -l 3 "{}"'.format(light, color, cap)
+            proc_string2 = 'sudo /home/pi/code/rpi-led-webservice/examples-api-use/scrolling-text-example --led-cols=64 --led-rows=32 -s 8 -b {} -f ../fonts/7x13B.bdf -C {} -y 8 -l 3 "{}"'.format(light, color, cap)
             
             #print(proc_string2)  
             proc_s = proc_string1+';'+proc_string2
