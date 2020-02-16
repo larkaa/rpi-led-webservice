@@ -1,0 +1,1 @@
+g++ -Wall -O3 -g -fPIC -DRGB_SLOWDOWN_GPIO=2  -DDEFAULT_HARDWARE=adafruit-hat-pwm -Wextra -Wno-unused-parameter -fno-exceptions
