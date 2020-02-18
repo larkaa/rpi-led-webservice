@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import os
+import os 
 import sys
 #print(sys.path)
 from flask import Flask, request, redirect, url_for, render_template, flash, render_template_string
@@ -11,7 +11,7 @@ import time
 import random
 from redis import Redis
 from rq import Queue
-from tasks import push_to_led
+from tasks import push_to_led,play_sound
 
 
 UPLOAD_FOLDER = './uploads'
@@ -25,6 +25,10 @@ app.debug = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
+
+
+## Redis queue
+q = Queue(connection=Redis())
 
 def allowed_file(filename):
     return('.' in filename and \
@@ -40,6 +44,7 @@ def upload_file():
     light=1.0
     color = "51,119,255"
     rand = False
+    playSound = False
     
     if request.method == 'POST':
 
@@ -47,6 +52,8 @@ def upload_file():
             print(i,request.form[i])
             if 'random' in i:
                 rand = True
+            if 'playSound' in i:
+                playSound = True
                 
         if rand:
             rand = random.choice(os.listdir('/home/pi/Desktop/gifs/'))
@@ -70,8 +77,12 @@ def upload_file():
             proc_s = proc_string1+';'+proc_string2
             print(proc_s) 
             
-        q = Queue(connection=Redis())
-        tasks = q.enqueue(push_to_led, proc_s, result_ttl=0)
+        #q = Queue(connection=Redis())
+        if playSound:
+            #q.enqueue(play_sound, 1, result_ttl=0)
+            tasks = q.enqueue(push_to_led, proc_s,1, result_ttl=0)
+        else:    
+            tasks = q.enqueue(push_to_led, proc_s, result_ttl=0)
         #push_to_led()
         
         

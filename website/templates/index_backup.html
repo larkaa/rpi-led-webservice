@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         
         
-        <script src="{{ url_for('static', filename='css/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
 	
 	
@@ -133,7 +133,7 @@
 <div class="form-group">
 
   
-
+ 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/la_color_picker.css')}}">
 <div class="input-group">
@@ -182,7 +182,8 @@
 <small id="info" class="form-text text-muted">Smaller values darken, larger values lighten, 100% is no change. Use '20%' for very dark and '200%' for very bright</small>
   </div>
 
-  <button type="submit" class="btn btn-primary" onclick="MyCustFunc()" id="submit">  Display  </button>
+  <button type="submit" class="btn btn-primary" onclick="MyCustFunc()" id="submit">  Display  </button><br><br>
+<button type="submit" class="btn btn-primary" onclick="MyCustFunc()" name="random" value="random">  Random!  </button>
 </form>
 
 

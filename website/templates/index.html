@@ -130,10 +130,12 @@
 -->
 </div>
 
+
 <div class="form-group">
 
   
- 
+
+
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/la_color_picker.css')}}">
 <div class="input-group">
@@ -179,11 +181,24 @@
 </div>
 
   
-<small id="info" class="form-text text-muted">Smaller values darken, larger values lighten, 100% is no change. Use '20%' for very dark and '200%' for very bright</small>
+<small id="info" class="form-text text-muted">Smaller values darken, larger values lighten. Use '5' for very dark and '100' for super bright</small>
   </div>
 
-  <button type="submit" class="btn btn-primary" onclick="MyCustFunc()" id="submit">  Display  </button><br><br>
+
+  <button type="submit" class="btn btn-primary" onclick="MyCustFunc()" id="submit">  Display  </button><br>
+
+<br>
 <button type="submit" class="btn btn-primary" onclick="MyCustFunc()" name="random" value="random">  Random!  </button>
+
+ <div class="pull-right">
+  <input class="pull-right" type="checkbox" value="" id="defaultCheck1" name="playSound">
+  <label class="pull-right" for="defaultCheck1">
+    Sound notification
+  </label>
+</div>
+
+
+
 </form>
 
 
