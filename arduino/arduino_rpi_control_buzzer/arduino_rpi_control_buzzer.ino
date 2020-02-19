@@ -1,6 +1,7 @@
 /*
-
-  This example code is in the public domain.
+  Runs a particular tune when 
+  it reads an integer from the 
+  serial input
   http://www.arduino.cc/en/Tutorial/Tone
 */
 
@@ -9,15 +10,14 @@ int speakerPin = 3;
 int message = 0;
 
 
-
 //Link secret found
 int melody1[] = {
-   NOTE_G4, NOTE_FS4, NOTE_DS4, NOTE_A3, NOTE_GS3, 
-   NOTE_E4, NOTE_GS4, NOTE_C5 
+   NOTE_G5, NOTE_FS5, NOTE_DS5, NOTE_A4, NOTE_GS4, 
+   NOTE_E5, NOTE_GS5, NOTE_C6 
   };
 int noteDurations1[] = {
-  //8,16,16,8,16,8,16,8
-  8,8,8,8,8,8,8,3
+  //8,8,8,8,8,8,8,3
+  10,10,10,10,10,10,10,3
 };
 
 //Quick tones
@@ -25,7 +25,7 @@ int melody2[] = {
   NOTE_C5, NOTE_D3, NOTE_E5, NOTE_C4 
 };
 int noteDurations2[] = {
-  8,8,8,8 
+  10,10,10,10 
 };
 
 //Doorbell melody
@@ -43,11 +43,10 @@ void ring(int melody[], int noteDurations[]){
     //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
     int noteDuration = 1000 / noteDurations[thisNote];
     tone(speakerPin, melody[thisNote], noteDuration);
-
     // to distinguish the notes, set a minimum time between them.
     // the note's duration + 30% seems to work well:
-    //int pauseBetweenNotes = noteDuration * 1.10;
-    int pauseBetweenNotes = noteDuration;
+    int pauseBetweenNotes = noteDuration * 1.20;
+    //int pauseBetweenNotes = noteDuration*1.1;
     delay(pauseBetweenNotes);
     // stop the tone playing:
     noTone(speakerPin);
@@ -56,8 +55,6 @@ void ring(int melody[], int noteDurations[]){
 
 void setup() {
   Serial.begin(9600);
-  ring(melody2,noteDurations2);
-  //Serial.println('temp');
 }
 
 void loop() {

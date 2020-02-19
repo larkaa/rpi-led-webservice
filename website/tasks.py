@@ -5,36 +5,47 @@ import serial
 
 def play_sound(num=1):
     
-    try:
-        ser = serial.Serial('/dev/ttyUSB0', 9600)
-    except:
-        ser = serial.Serial('/dev/ttyUSB1', 9600)
+    with serial.Serial('/dev/ttyUSB0', 9600,timeout=1) as ser:
     
-    if num == 1:
-        while True:
-            ser.write(b'1')
-            temp = int(ser.readline().strip())
-            if temp==num:
-                return
-            time.sleep(.1)
-            
-    elif num == 2:
-        while True:
-            ser.write(b'2')
-            temp = int(ser.readline().strip())
-            if temp==num:
-                return
-            time.sleep(.1)
-            
-    elif num == 3:
-        while True:
-            ser.write(b'3')
-            temp = int(ser.readline().strip())
-            if temp==num:
-                return
-            time.sleep(.1)
-    else:
-        return
+    #try:
+    #    ser = serial.Serial('/dev/ttyUSB0', 9600)
+    #except:
+    #    ser = serial.Serial('/dev/ttyUSB1', 9600)
+        
+    #time.sleep(.01)
+    
+        if num == 1:
+            while True:
+                ser.write(b'1')
+                ser.flush()
+                temp = int(ser.readline().strip())
+                if temp==num:
+                    ser.close()
+                    return
+                time.sleep(.1)
+                
+        elif num == 2:
+            while True:
+                ser.write(b'2')
+                ser.flush()
+                temp = int(ser.readline().strip())
+                if temp==num:
+                    ser.close()
+                    return
+                time.sleep(.1)
+                
+        elif num == 3:
+            while True:
+                ser.write(b'3')
+                ser.flush()
+                temp = int(ser.readline().strip())
+                if temp==num:
+                    ser.close()
+                    return
+                time.sleep(.1)
+        else:
+            ser.close()
+            return
     
 
 def push_to_led(process_string, sound = 0):
