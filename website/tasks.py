@@ -6,14 +6,6 @@ import serial
 def play_sound(num=1):
     
     with serial.Serial('/dev/ttyUSB0', 9600,timeout=1) as ser:
-    
-    #try:
-    #    ser = serial.Serial('/dev/ttyUSB0', 9600)
-    #except:
-    #    ser = serial.Serial('/dev/ttyUSB1', 9600)
-        
-    #time.sleep(.01)
-    
         if num == 1:
             while True:
                 ser.write(b'1')
@@ -67,18 +59,18 @@ def push_to_led(process_string, sound = 0):
                 if f==True and time.time() - start > 30:
                     return
                 if f==True:
-                    time.sleep(.5)
-    
+                    time.sleep(.01)
+    if sound:
+            play_sound(1)
     try:
         #print(process_string)
         #p1,p2 = process_string.split(';')
         #print(p2)
-        if sound:
-            play_sound(1)
+        
         subprocess.run(process_string,shell=True)
     except Exception as e:
         #flash('Oops, try again')
-        print(e)
+        print('Error!!! ', e)
     return
             
 

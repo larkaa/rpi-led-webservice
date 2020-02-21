@@ -18,6 +18,7 @@ with serial.Serial('/dev/ttyUSB0', 9600,timeout=1) as ser:
     print(temp)
     temp = temp.strip()
     print('temp: ',temp)
+    #time.sleep(4)
 
 # Ecriture de chaque message recu
 #ser.write(b'5')

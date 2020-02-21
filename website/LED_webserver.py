@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import os 
+import os
 import sys
 #print(sys.path)
 from flask import Flask, request, redirect, url_for, render_template, flash, render_template_string
@@ -12,6 +12,7 @@ import random
 from redis import Redis
 from rq import Queue
 from tasks import push_to_led,play_sound
+#import worker
 
 
 UPLOAD_FOLDER = './uploads'
@@ -68,7 +69,7 @@ def upload_file():
             light = min(100,light)
             color = request.form["text_color"].replace(' ','').strip()
             print(color) 
-            cap = request.form["caption"]
+            cap = request.form["caption"].strip()
             proc_string1 = 'sudo /home/pi/code/rpi-led-webservice/examples-api-use/demo --led-cols=64 --led-rows=32 -D11 -t 2.2'
             
             proc_string2 = 'sudo /home/pi/code/rpi-led-webservice/examples-api-use/scrolling-text-example --led-cols=64 --led-rows=32 -s 8 -b {} -f ../fonts/7x13B.bdf -C {} -y 8 -l 3 "{}"'.format(light, color, cap)
@@ -80,7 +81,7 @@ def upload_file():
         #q = Queue(connection=Redis())
         if playSound:
             #q.enqueue(play_sound, 1, result_ttl=0)
-            tasks = q.enqueue(push_to_led, proc_s,1, result_ttl=0)
+            tasks = q.enqueue(push_to_led, proc_s, 1, result_ttl=0)
         else:    
             tasks = q.enqueue(push_to_led, proc_s, result_ttl=0)
         #push_to_led()
