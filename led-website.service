@@ -1,0 +1,12 @@
+[Unit]
+Description=LED message website
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/code/rpi-led-webservice/website/
+ExecStart=/usr/bin/python3 /home/pi/code/rpi-led-webservice/website/LED_webserver.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

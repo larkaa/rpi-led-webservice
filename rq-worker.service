@@ -1,0 +1,12 @@
+[Unit]
+Description=RQ worker
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/code/rpi-led-webservice/website
+ExecStart=/usr/bin/python3 /home/pi/code/rpi-led-webservice/website/worker.py
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

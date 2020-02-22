@@ -1,0 +1,12 @@
+[Unit]
+Description=Twitter listener
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/code/rpi-led-webservice/
+ExecStart=/usr/bin/python3 /home/pi/code/rpi-led-webservice/twitter_stream.py
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
