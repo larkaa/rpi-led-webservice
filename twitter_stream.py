@@ -34,22 +34,26 @@ class LEDStreamer(tweepy.StreamListener):
         #print(status.entities['hashtags'])
         #print()
         sound=False
-
-        #text = "{} says: {}".format(status.user.screen_name,status.text)
+        try:
+            temp = status.extended_tweet['full_text']
+        except:
+            temp = status.text
+        text = "{}: {}".format(status.user.name.split(' ')[0],
+                               temp)
         text = status.text
         text = text.replace('@132Vert','').strip()
         #pattern = re.compile('#\S*')
         #text = pattern.sub('',text).strip()
         
-        if '#z' in status.text:
+        if '#z' in temp.lower():
             sound = 1
             play_sound(num=sound)
             text = text.replace('#z','').strip()
-        if '#beep' in status.text:
+        if '#beep' in temp.lower():
             sound = 2
             play_sound(num=sound)
             text = text.replace('#beep','').strip()
-        if '#bell' in status.text:
+        if '#bell' in temp.lower():
             sound = 3
             play_sound(num=sound)
             return
@@ -66,5 +70,7 @@ led_listener = LEDStreamer()
 print('starting stream...')
 mystream = tweepy.Stream(auth = api.auth, listener=LEDStreamer())
 
-mystream.filter(follow=[follow_id])
+#mystream.filter(follow=[follow_id])
+mystream.filter(track=["132Vert"])
+
 
