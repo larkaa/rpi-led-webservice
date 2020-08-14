@@ -72,6 +72,4 @@ def push_to_led(process_string, sound = 0):
         #flash('Oops, try again')
         print('Error!!! ', e)
     return
-            
-
-        
+                

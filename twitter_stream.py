@@ -40,8 +40,8 @@ class LEDStreamer(tweepy.StreamListener):
             temp = status.text
         text = "{}: {}".format(status.user.name.split(' ')[0],
                                temp)
-        text = status.text
         text = text.replace('@132Vert','').strip()
+        text = text.replace('@132vert','').strip()
         #pattern = re.compile('#\S*')
         #text = pattern.sub('',text).strip()
         

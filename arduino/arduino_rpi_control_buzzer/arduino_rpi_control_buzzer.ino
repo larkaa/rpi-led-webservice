@@ -54,7 +54,16 @@ void ring(int melody[], int noteDurations[]){
 }
 
 void setup() {
+  delay(5000);
+  
+  
   Serial.begin(9600);
+
+  while (!Serial) {
+    delay(1000);
+    ; // wait for serial port to connect. Needed for native USB
+  }
+  ring(melody1,noteDurations1);
 }
 
 void loop() {
